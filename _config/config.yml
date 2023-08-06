@@ -1,0 +1,11 @@
+---
+Name: goldfinch-helpers
+---
+
+SilverStripe\ORM\DataObject:
+  extensions:
+    - App\Extensions\DataObjectExtension
+
+SilverStripe\Core\Injector\Injector:
+  SCVarchar:
+    class: App\ORM\FieldType\DBVarcharShortcode
