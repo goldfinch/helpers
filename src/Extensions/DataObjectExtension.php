@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Extensions;
+namespace Goldfinch\Helpers\Extensions;
 
 use SilverStripe\Forms\FieldList;
 use SilverStripe\ORM\DataExtension;
-use SilverStripe\Core\Config\Config;
 use SilverStripe\ORM\ValidationResult;
 
 class DataObjectExtension extends DataExtension

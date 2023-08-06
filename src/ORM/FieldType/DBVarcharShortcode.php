@@ -1,6 +1,6 @@
 <?php
 
-namespace App\ORM\FieldType;
+namespace Goldfinch\Helpers\ORM\FieldType;
 
 use SilverStripe\Core\Convert;
 use SilverStripe\Forms\TextField;
