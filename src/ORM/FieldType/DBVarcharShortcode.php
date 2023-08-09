@@ -92,7 +92,7 @@ class DBVarcharShortcode extends DBVarchar
      */
     public function scaffoldFormField($title = null, $params = null)
     {
-        return TextField::create($this->name, $title)->setDescription('· allowed shortcodes: <b title="makes new line">[br]</b>');
+        return TextField::create($this->name, $title)->setDescription('· allowed shortcodes: <b title="makes new line">[br]</b>, <b title="wraps text in span">[sp]</b>');
     }
 
     public function NoSC()
