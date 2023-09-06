@@ -3,6 +3,7 @@
 use SilverStripe\Core\Environment;
 use SilverStripe\Core\Config\Config;
 use Silverstripe\SiteConfig\SiteConfig;
+use SilverStripe\Control\Director;
 
 if (! function_exists('ss_env')) {
     /**
@@ -40,5 +41,29 @@ if (! function_exists('ss_siteconfig')) {
     function ss_siteconfig()
     {
         return SiteConfig::current_site_config();
+    }
+}
+
+if (! function_exists('ss_isLive')) {
+    /**
+     * Gets the site environment
+     *
+     * @return boolean
+     */
+    function ss_isLive()
+    {
+        return Director::isLive();
+    }
+}
+
+if (! function_exists('ss_isDev')) {
+    /**
+     * Gets the site environment
+     *
+     * @return boolean
+     */
+    function ss_isDev()
+    {
+        return Director::isDev();
     }
 }
