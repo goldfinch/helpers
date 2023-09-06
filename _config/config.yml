@@ -7,5 +7,5 @@ SilverStripe\ORM\DataObject:
     - Goldfinch\Helpers\Extensions\DataObjectExtension
 
 SilverStripe\Core\Injector\Injector:
-  SCVarchar:
+  ShortcodeVarchar:
     class: Goldfinch\Helpers\ORM\FieldType\DBVarcharShortcode
