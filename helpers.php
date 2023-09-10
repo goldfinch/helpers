@@ -26,7 +26,7 @@ if (! function_exists('ss_config')) {
      * @param  string  $property
      * @return mixed
      */
-    function ss_config(string $class, string $property)
+    function ss_config(string $class, string $property = null)
     {
         return Config::inst()->get($class, $property);
     }
