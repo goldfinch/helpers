@@ -24,7 +24,18 @@ class HelpersTemplateProvider implements TemplateGlobalProvider
             'strParser',
             'strSplit',
             'strPhone',
+            'findPage',
         ];
+    }
+
+    /**
+     * @return string
+     */
+    public static function findPage($class, $filter = [])
+    {
+        $filter = $filter ? json_decode($filter, true) : [];
+
+        return $class::get()->filter($filter);
     }
 
     /**
