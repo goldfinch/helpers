@@ -15,7 +15,7 @@ class DataObjectSortable extends DataExtension
         'SortOrder' => true,
     ];
 
-    private static $default_sort = 'SortOrder';
+    private static $default_sort = 'SortOrder ASC';
 
     // public function updateCMSFields(FieldList $fields)
     // {
