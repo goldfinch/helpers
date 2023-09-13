@@ -2,7 +2,7 @@
 
 namespace Goldfinch\Helpers\Extensions;
 
-use SilverStripe\Forms\FieldList;
+// use SilverStripe\Forms\FieldList;
 use SilverStripe\ORM\DataExtension;
 
 class DataObjectSortable extends DataExtension
@@ -11,11 +11,15 @@ class DataObjectSortable extends DataExtension
         'SortOrder' => 'Int',
     ];
 
-    public function updateCMSFields(FieldList $fields)
-    {
-        $fields->removeByName([
-            'Sort',
-            'SortOrder',
-        ]);
-    }
+    private static $indexes = [
+        'SortOrder' => true,
+    ];
+
+    // public function updateCMSFields(FieldList $fields)
+    // {
+    //     $fields->removeByName([
+    //         'Sort',
+    //         'SortOrder',
+    //     ]);
+    // }
 }
