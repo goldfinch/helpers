@@ -31,6 +31,8 @@ class HelpersTemplateProvider implements TemplateGlobalProvider
 
     /**
      * @return string
+     *
+     * $filter array eg: findObject(App\Page, '{"NestedPseudo": 0, "NestedRedirectPageID": 0}')
      */
     public static function findObject($class, $filter = [])
     {
@@ -39,6 +41,8 @@ class HelpersTemplateProvider implements TemplateGlobalProvider
 
     /**
      * @return string
+     *
+     * $filter array eg: findObject(App\Page, '{"NestedPseudo": 0, "NestedRedirectPageID": 0}')
      */
     public static function findObjects($class, $filter = [])
     {
