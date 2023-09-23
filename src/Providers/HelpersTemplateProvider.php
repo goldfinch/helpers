@@ -25,6 +25,7 @@ class HelpersTemplateProvider implements TemplateGlobalProvider
             'strSplit',
             'strPhone',
             'findObject',
+            'findObjects',
         ];
     }
 
@@ -32,6 +33,14 @@ class HelpersTemplateProvider implements TemplateGlobalProvider
      * @return string
      */
     public static function findObject($class, $filter = [])
+    {
+        return $this->findObjects($class, $filter)->first();
+    }
+
+    /**
+     * @return string
+     */
+    public static function findObjects($class, $filter = [])
     {
         $filter = $filter ? json_decode($filter, true) : [];
 
