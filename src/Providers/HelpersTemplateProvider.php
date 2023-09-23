@@ -24,14 +24,14 @@ class HelpersTemplateProvider implements TemplateGlobalProvider
             'strParser',
             'strSplit',
             'strPhone',
-            'findPage',
+            'findObject',
         ];
     }
 
     /**
      * @return string
      */
-    public static function findPage($class, $filter = [])
+    public static function findObject($class, $filter = [])
     {
         $filter = $filter ? json_decode($filter, true) : [];
 
