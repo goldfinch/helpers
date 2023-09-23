@@ -34,7 +34,7 @@ class HelpersTemplateProvider implements TemplateGlobalProvider
      */
     public static function findObject($class, $filter = [])
     {
-        return $this->owner->findObjects($class, $filter)->first();
+        return self::findObjects($class, $filter)->first();
     }
 
     /**
