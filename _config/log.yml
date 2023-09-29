@@ -1,0 +1,26 @@
+---
+Name: goldfinch-helpers-log
+Only:
+  environment: live
+---
+
+SilverStripe\Core\Injector\Injector:
+  Psr\Log\LoggerInterface:
+    calls:
+      LogFileHandler: [ pushHandler, [ '%$LogFileHandler' ] ]
+      MailHandler: [ pushHandler, [ '%$MailHandler' ] ]
+  LogFileHandler:
+      class: Monolog\Handler\StreamHandler
+      constructor:
+        - '`APP_ERROR_LOG`'
+        - 'info'
+  MailHandler:
+      class: Monolog\Handler\NativeMailerHandler
+      constructor:
+        - '`APP_DEV_EMAIL`'
+        - There was an error on the website
+        - '`APP_DEV_EMAIL`'
+        - error
+      properties:
+        ContentType: text/html
+        Formatter: '%$SilverStripe\Logging\DetailedErrorFormatter'

@@ -1,0 +1,37 @@
+<?php
+
+namespace Goldfinch\Helpers\Commands;
+
+use Goldfinch\Taz\Console\GeneratorCommand;
+use Goldfinch\Taz\Services\InputOutput;
+use Symfony\Component\Console\Command\Command;
+use Hackzilla\PasswordGenerator\Generator\ComputerPasswordGenerator;
+
+#[AsCommand(name: 'app:generate-password')]
+class GeneratePasswordCommand extends GeneratorCommand
+{
+    protected static $defaultName = 'app:generate-password';
+
+    protected $description = 'Generate password';
+
+    protected function execute($input, $output): int
+    {
+        // parent::execute($input, $output);
+
+        $generator = new ComputerPasswordGenerator();
+
+        $generator
+            ->setUppercase()
+            ->setLowercase()
+            ->setNumbers()
+            ->setSymbols(false)
+            ->setLength(16);
+
+        $password = $generator->generatePasswords(12);
+
+        $io = new InputOutput($input, $output);
+        $io->text($password);
+
+        return Command::SUCCESS;
+    }
+}
