@@ -24,10 +24,10 @@ class GeneratePasswordCommand extends GeneratorCommand
             ->setUppercase()
             ->setLowercase()
             ->setNumbers()
-            ->setSymbols(false)
+            ->setSymbols(true)
             ->setLength(16);
 
-        $password = $generator->generatePasswords(12);
+        $password = $generator->generatePasswords(1);
 
         $io = new InputOutput($input, $output);
         $io->text($password);
