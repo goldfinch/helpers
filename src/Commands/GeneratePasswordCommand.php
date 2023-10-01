@@ -7,10 +7,10 @@ use Goldfinch\Taz\Services\InputOutput;
 use Symfony\Component\Console\Command\Command;
 use Hackzilla\PasswordGenerator\Generator\ComputerPasswordGenerator;
 
-#[AsCommand(name: 'app:generate-password')]
+#[AsCommand(name: 'generate:password')]
 class GeneratePasswordCommand extends GeneratorCommand
 {
-    protected static $defaultName = 'app:generate-password';
+    protected static $defaultName = 'generate:password';
 
     protected $description = 'Generate password';
 

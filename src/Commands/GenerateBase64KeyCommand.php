@@ -6,10 +6,10 @@ use Goldfinch\Taz\Console\GeneratorCommand;
 use Goldfinch\Taz\Services\InputOutput;
 use Symfony\Component\Console\Command\Command;
 
-#[AsCommand(name: 'app:base64-key')]
+#[AsCommand(name: 'generate:base64-key')]
 class GenerateBase64KeyCommand extends GeneratorCommand
 {
-    protected static $defaultName = 'app:base64-key';
+    protected static $defaultName = 'generate:base64-key';
 
     protected $description = 'Generate base64 key';
 

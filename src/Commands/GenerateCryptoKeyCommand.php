@@ -6,10 +6,10 @@ use Goldfinch\Taz\Console\GeneratorCommand;
 use Goldfinch\Taz\Services\InputOutput;
 use Symfony\Component\Console\Command\Command;
 
-#[AsCommand(name: 'app:crypto-key')]
+#[AsCommand(name: 'generate:crypto-key')]
 class GenerateCryptoKeyCommand extends GeneratorCommand
 {
-    protected static $defaultName = 'app:crypto-key';
+    protected static $defaultName = 'generate-crypto-key';
 
     protected $description = 'Generate bin2hex key';
 
