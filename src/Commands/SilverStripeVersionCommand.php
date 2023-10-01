@@ -2,11 +2,12 @@
 
 namespace Goldfinch\Helpers\Commands;
 
-use Goldfinch\Taz\Console\GeneratorCommand;
+use Composer\InstalledVersions;
+use SilverStripe\Admin\LeftAndMain;
 use Goldfinch\Taz\Services\InputOutput;
+use Goldfinch\Taz\Console\GeneratorCommand;
 use Symfony\Component\Console\Command\Command;
 use Hackzilla\PasswordGenerator\Generator\ComputerPasswordGenerator;
-use SilverStripe\Admin\LeftAndMain;
 
 #[AsCommand(name: 'app:ss-version')]
 class SilverStripeVersionCommand extends GeneratorCommand
@@ -19,10 +20,10 @@ class SilverStripeVersionCommand extends GeneratorCommand
     {
         // parent::execute($input, $output);
 
-        $ss = singleton(LeftAndMain::class);
+        $version = InstalledVersions::getVersion('silverstripe/recipe-cms');
 
         $io = new InputOutput($input, $output);
-        $io->text($ss->CMSVersionNumber());
+        $io->text($version);
 
         return Command::SUCCESS;
     }
