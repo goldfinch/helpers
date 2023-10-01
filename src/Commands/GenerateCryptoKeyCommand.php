@@ -9,7 +9,7 @@ use Symfony\Component\Console\Command\Command;
 #[AsCommand(name: 'generate:crypto-key')]
 class GenerateCryptoKeyCommand extends GeneratorCommand
 {
-    protected static $defaultName = 'generate-crypto-key';
+    protected static $defaultName = 'generate:crypto-key';
 
     protected $description = 'Generate bin2hex key';
 
