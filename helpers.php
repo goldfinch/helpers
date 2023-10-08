@@ -67,3 +67,15 @@ if (! function_exists('ss_isDev')) {
         return Director::isDev();
     }
 }
+
+if (! function_exists('is_sha1')) {
+    /**
+     * Check if string sha1 format
+     *
+     * @return boolean
+     */
+    function is_sha1($str)
+    {
+        return (bool) preg_match('/^[0-9a-f]{40}$/i', $str);
+    }
+}
