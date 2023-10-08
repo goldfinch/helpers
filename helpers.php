@@ -30,7 +30,7 @@ if (! function_exists('ss_config')) {
     {
         $cfg = Config::inst()->get($class, $property);
 
-        if ($subproperty)
+        if ($cfg && $subproperty)
         {
             if (isset($cfg[$subproperty]))
             {
