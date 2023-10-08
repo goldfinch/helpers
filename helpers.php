@@ -26,9 +26,23 @@ if (! function_exists('ss_config')) {
      * @param  string  $property
      * @return mixed
      */
-    function ss_config(string $class, string $property = null)
+    function ss_config(string $class, string $property = null, $subproperty = null)
     {
-        return Config::inst()->get($class, $property);
+        $cfg = Config::inst()->get($class, $property);
+
+        if ($subproperty)
+        {
+            if (isset($cfg[$subproperty]))
+            {
+                return $cfg[$subproperty];
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        return $cfg;
     }
 }
 
