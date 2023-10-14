@@ -11,6 +11,7 @@ use SilverStripe\Forms\GridField\GridFieldAddNewButton;
 use SilverStripe\Forms\GridField\GridFieldDeleteAction;
 use SilverStripe\Forms\GridField\GridFieldFilterHeader;
 use SilverStripe\Forms\GridField\GridFieldToolbarHeader;
+use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
 use SilverStripe\Forms\GridField\GridFieldSortableHeader;
 use SilverStripe\Forms\GridField\GridFieldAddExistingAutocompleter;
 
@@ -31,6 +32,7 @@ class GridFieldManyManyConfig extends GridFieldConfig
             GridFieldDeleteAction::create(),
             GridFieldEditButton::create(),
             GridField_ActionMenu::create(),
+            GridFieldOrderableRows::create('SortOrder'),
         );
 
         $dataColumns = $this->getComponentByType(GridFieldDataColumns::class);
