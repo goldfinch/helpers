@@ -39,7 +39,7 @@ class GridFieldManyManyConfig extends GridFieldConfig
 
         $dataColumns->setDisplayFields([
             'Title' => 'Title',
-            'Link'=> 'URL',
+            // 'Link'=> 'URL',
             'LastEdited' => 'Changed'
         ]);
 
