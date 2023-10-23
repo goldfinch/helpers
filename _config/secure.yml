@@ -1,15 +1,4 @@
 ---
-Name: goldfinch-helpers-canonicalurls
-After: '#canonicalurls'
----
-
-SilverStripe\Core\Injector\Injector:
-  SilverStripe\Control\Middleware\CanonicalURLMiddleware:
-    properties:
-      ForceSSL: '`APP_FORCE_SSL`'
-      ForceWWW: '`APP_FORCE_WWW`'
-
----
 Name: goldfinch-helpers-secure-session
 ---
 
