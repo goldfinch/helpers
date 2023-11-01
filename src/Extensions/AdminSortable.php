@@ -4,7 +4,8 @@ namespace Goldfinch\Helpers\Extensions;
 
 use SilverStripe\Core\Extension;
 use Goldfinch\Helpers\Extensions\DataObjectSortable;
-use UndefinedOffset\SortableGridField\Forms\GridFieldSortableRows;
+use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
+// use UndefinedOffset\SortableGridField\Forms\GridFieldSortableRows;
 
 class AdminSortable extends Extension
 {
@@ -15,8 +16,9 @@ class AdminSortable extends Extension
             in_array(DataObjectSortable::class, ss_config($this->owner->modelClass, 'extensions'))
         )
         {
-            $config->addComponent($sortable = GridFieldSortableRows::create('SortOrder'));
-            $sortable->setUpdateVersionedStage('Live');
+            $config->addComponent(GridFieldOrderableRows::create('SortOrder')->setRepublishLiveRecords(true));
+            // $config->addComponent($sortable = GridFieldSortableRows::create('SortOrder'));
+            // $sortable->setUpdateVersionedStage('Live');
             // $sortable->setUpdateVersionedStage('Versions');
         }
     }
