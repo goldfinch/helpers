@@ -6,6 +6,7 @@ Name: goldfinch-helpers-secure-session
 SilverStripe\Control\Session:
   cookie_samesite: 'Strict'
   cookie_secure: true
+  # cookie_domain: '.website.nz'
 
 ---
 Name: goldfinch-helpers-secure-alc
