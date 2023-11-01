@@ -31,3 +31,7 @@ SilverStripe\Admin\ModelAdmin:
 SilverStripe\Admin\SecurityAdmin:
   extensions:
     - Goldfinch\Helpers\Extensions\SecurityAdminExtension
+
+SilverStripe\Security\DefaultAdminService:
+  extensions:
+    - Goldfinch\Helpers\Extensions\DefaultAdminServiceExtension
