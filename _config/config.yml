@@ -27,3 +27,7 @@ SilverStripe\Admin\ModelAdmin:
     - Goldfinch\Helpers\Extensions\AdminPaginator
     - Goldfinch\Helpers\Extensions\AdminPlain
     - Goldfinch\Helpers\Extensions\AdminSortable
+
+SilverStripe\Admin\SecurityAdmin:
+  extensions:
+    - Goldfinch\Helpers\Extensions\SecurityAdminExtension
