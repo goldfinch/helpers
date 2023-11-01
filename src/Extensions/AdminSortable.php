@@ -17,6 +17,7 @@ class AdminSortable extends Extension
         )
         {
             $config->addComponent(GridFieldOrderableRows::create('SortOrder')->setRepublishLiveRecords(true));
+
             // $config->addComponent($sortable = GridFieldSortableRows::create('SortOrder'));
             // $sortable->setUpdateVersionedStage('Live');
             // $sortable->setUpdateVersionedStage('Versions');

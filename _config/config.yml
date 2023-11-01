@@ -21,3 +21,9 @@ SilverStripe\ORM\FieldType\DBString:
 SilverStripe\ORM\FieldType\DBHTMLVarchar:
   extensions:
     - Goldfinch\Helpers\Extensions\DBHighlight
+
+SilverStripe\Admin\ModelAdmin:
+  extensions:
+    - Goldfinch\Helpers\Extensions\AdminPaginator
+    - Goldfinch\Helpers\Extensions\AdminPlain
+    - Goldfinch\Helpers\Extensions\AdminSortable
