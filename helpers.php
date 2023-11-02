@@ -4,6 +4,31 @@ use SilverStripe\Core\Environment;
 use SilverStripe\Core\Config\Config;
 use Silverstripe\SiteConfig\SiteConfig;
 use SilverStripe\Control\Director;
+use Exception;
+
+if (! function_exists('get_composer_json')) {
+    /**
+     * Gets composer.json data
+     *
+     * @return mixed
+     */
+    function get_composer_json()
+    {
+        $path = BASE_PATH . '/composer.json';
+        $result = null;
+
+        if (file_exists($path ?? '')) {
+            $content = file_get_contents($path ?? '');
+            $result = json_decode($content ?? '', true);
+            if (json_last_error()) {
+                $errorMessage = json_last_error_msg();
+                throw new Exception("$path: $errorMessage");
+            }
+        }
+
+        return $result;
+    }
+}
 
 if (! function_exists('ss_env')) {
     /**
