@@ -4,7 +4,6 @@ use SilverStripe\Core\Environment;
 use SilverStripe\Core\Config\Config;
 use Silverstripe\SiteConfig\SiteConfig;
 use SilverStripe\Control\Director;
-use Exception;
 
 if (! function_exists('get_composer_json')) {
     /**
@@ -22,7 +21,7 @@ if (! function_exists('get_composer_json')) {
             $result = json_decode($content ?? '', true);
             if (json_last_error()) {
                 $errorMessage = json_last_error_msg();
-                throw new Exception("$path: $errorMessage");
+                throw new \Exception("$path: $errorMessage");
             }
         }
 
