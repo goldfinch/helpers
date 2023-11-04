@@ -16,6 +16,11 @@ class ViewableTemplateProvider implements TemplateGlobalProvider
 
     public static function ViewJson($string)
     {
+        if (!$string)
+        {
+            return $string;
+        }
+
         $array = ss_template_json_parser($string);
 
         return ss_viewable_parser($array);
@@ -23,6 +28,11 @@ class ViewableTemplateProvider implements TemplateGlobalProvider
 
     public static function ViewArray($array)
     {
+        if (!$array)
+        {
+            return $array;
+        }
+
         return ss_viewable_parser($array);
     }
 }
