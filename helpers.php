@@ -1,9 +1,11 @@
 <?php
 
+use SilverStripe\ORM\ArrayList;
+use SilverStripe\View\ArrayData;
+use SilverStripe\Control\Director;
 use SilverStripe\Core\Environment;
 use SilverStripe\Core\Config\Config;
 use Silverstripe\SiteConfig\SiteConfig;
-use SilverStripe\Control\Director;
 
 if (! function_exists('get_composer_json')) {
     /**
