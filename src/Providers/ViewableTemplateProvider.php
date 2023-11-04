@@ -2,6 +2,8 @@
 
 namespace Goldfinch\Helpers\Providers;
 
+use SilverStripe\View\TemplateGlobalProvider;
+
 class ViewableTemplateProvider implements TemplateGlobalProvider
 {
     public static function get_template_global_variables(): array
