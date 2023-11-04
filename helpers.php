@@ -29,6 +29,54 @@ if (! function_exists('get_composer_json')) {
     }
 }
 
+if (! function_exists('ss_template_json_parser')) {
+    /**
+     * Parse json string from .ss to array
+     *
+     * @param  string  $string
+     * @return mixed
+     */
+    function ss_template_json_parser($string)
+    {
+        return json_decode(html_entity_decode($string), true);
+    }
+}
+
+if (! function_exists('ss_viewable_parser')) {
+    /**
+     * Parse array to viewable data that can be used in Silverstripe template
+     *
+     * @param  array  $array
+     * @return ArrayData/ArrayList
+     */
+    function ss_viewable_parser($array)
+    {
+        array_walk($array, $walker = function (&$value, $key) use (&$walker) {
+
+            if (is_array($value))
+            {
+                array_walk($value, $walker);
+
+                if (array_is_list($value))
+                {
+                    $value = new ArrayList($value);
+                }
+            }
+        });
+
+        if (array_is_list($array))
+        {
+            $array = new ArrayList($array);
+        }
+        else
+        {
+            $array = new ArrayData($array);
+        }
+
+        return  $array;
+    }
+}
+
 if (! function_exists('ss_env')) {
     /**
      * Gets the value of an environment variable.
