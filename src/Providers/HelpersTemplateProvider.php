@@ -26,6 +26,8 @@ class HelpersTemplateProvider implements TemplateGlobalProvider
             'strPhone',
             'findObject',
             'findObjects',
+            'hrefPhone',
+            'hrefEmail',
         ];
     }
 
@@ -151,5 +153,15 @@ class HelpersTemplateProvider implements TemplateGlobalProvider
         }
 
         return $plus ? '+'.$phone : $phone;
+    }
+
+    public static function hrefPhone($str)
+    {
+        return 'tel:' . self::strPhone($str);
+    }
+
+    public static function hrefEmail($str)
+    {
+        return 'mailto:' . $str;
     }
 }
