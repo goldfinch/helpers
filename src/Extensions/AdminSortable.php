@@ -16,7 +16,15 @@ class AdminSortable extends Extension
             in_array(DataObjectSortable::class, ss_config($this->owner->modelClass, 'extensions'))
         )
         {
-            $config->addComponent(GridFieldOrderableRows::create('SortOrder')->setRepublishLiveRecords(true));
+            $versioned = true;
+
+            try {
+                $this->owner->isLiveVersion();
+            } catch (\BadMethodCallException $e) {
+                $versioned = false;
+            }
+
+            $config->addComponent(GridFieldOrderableRows::create('SortOrder')->setRepublishLiveRecords($versioned));
 
             // $config->addComponent($sortable = GridFieldSortableRows::create('SortOrder'));
             // $sortable->setUpdateVersionedStage('Live');
