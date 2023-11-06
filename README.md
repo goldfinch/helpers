@@ -10,3 +10,19 @@ DataObject
 `APP_ERROR_LOG`
 `APP_FORCE_SSL`
 `APP_FORCE_WWW`
+
+Sluggable extension
+
+```
+App\Models\SomeModel...:
+  extensions:
+    - Goldfinch\Helpers\Extensions\DataObjectSluggable
+
+-----
+
+class SomeModel extends DataObject
+
+    private static $urlsegment_source = 'Title';
+
+}
+```

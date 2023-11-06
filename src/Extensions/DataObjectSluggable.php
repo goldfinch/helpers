@@ -4,6 +4,7 @@ namespace Goldfinch\Helpers\Extensions;
 
 use SilverStripe\Forms\FieldList;
 use SilverStripe\ORM\DataExtension;
+use SilverStripe\View\Parsers\URLSegmentFilter;
 
 class DataObjectSluggable extends DataExtension
 {
@@ -26,7 +27,17 @@ class DataObjectSluggable extends DataExtension
     {
         if ($this->owner->Title)
         {
-            $this->URLSegment = $this->owner->generateURLSegment($this->owner->Title);
+            if (property_exists($this->owner, 'urlsegment_source'))
+            {
+                $urlSourceName = $this->owner->urlsegment_source;
+                $urlSource = $this->owner->$urlSourceName;
+            }
+            else
+            {
+                $urlSource = $this->owner->Title;
+            }
+
+            $this->owner->URLSegment = $this->owner->generateURLSegment($urlSource);
 
             // Ensure that this object has a non-conflicting URLSegment value.
             // dd($this->validURLSegment());
@@ -48,18 +59,17 @@ class DataObjectSluggable extends DataExtension
             $filteredTitle = "object-$this->ID";
         }
 
-        // Hook for extensions
-        $this->extend('updateURLSegment', $filteredTitle, $title);
+        $this->owner->extend('updateURLSegment', $filteredTitle, $title);
 
         return $filteredTitle;
     }
 
     public function validURLSegment()
     {
-        $classname = class_name($this->owner);
+        $classname = get_class($this->owner);
 
         $source = $classname::get()->filter([
-          'URLSegment' => $this->URLSegment,
+          'URLSegment' => $this->owner->URLSegment,
         ]);
 
         if ($this->owner->ID) {
