@@ -5,7 +5,7 @@ namespace Goldfinch\Helpers\Extensions;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\ORM\DataExtension;
 
-class DataObjectSlugable extends DataExtension
+class DataObjectSluggable extends DataExtension
 {
     private static $db = [
         'URLSegment' => 'Int',
@@ -22,10 +22,8 @@ class DataObjectSlugable extends DataExtension
         ]);
     }
 
-    protected function onBeforeWrite()
+    public function onBeforeWrite()
     {
-        parent::onBeforeWrite();
-
         if ($this->owner->Title)
         {
             $this->URLSegment = $this->owner->generateURLSegment($this->owner->Title);
