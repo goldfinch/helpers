@@ -8,7 +8,7 @@ use SilverStripe\ORM\DataExtension;
 class DataObjectSluggable extends DataExtension
 {
     private static $db = [
-        'URLSegment' => 'Int',
+        'URLSegment' => 'Varchar',
     ];
 
     private static $field_labels = [
