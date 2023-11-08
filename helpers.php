@@ -1,6 +1,7 @@
 <?php
 
 use SilverStripe\ORM\ArrayList;
+use SilverStripe\View\SSViewer;
 use SilverStripe\View\ArrayData;
 use SilverStripe\Control\Director;
 use SilverStripe\Core\Environment;
@@ -89,6 +90,34 @@ if (! function_exists('ss_env')) {
     function ss_env($key)
     {
         return Environment::getEnv($key);
+    }
+}
+
+if (! function_exists('ss_theme')) {
+    /**
+     * Get current theme
+     */
+    function ss_theme()
+    {
+        $theme = SSViewer::get_themes();
+        return isset($theme[1]) ? $theme[1] : null;
+    }
+}
+
+if (! function_exists('ss_theme_template_file_exists')) {
+    /**
+     * Check if template exists
+     *
+     * eg ($template: 'Partials/Forms/Contact')
+     *
+     * @param  string  $template
+     * @return mixed
+     */
+    function ss_theme_template_file_exists($template)
+    {
+        $fullpath = THEMES_PATH . '/' . ss_theme() . '/templates/' . $template . '.ss';
+
+        return file_exists($fullpath);
     }
 }
 
