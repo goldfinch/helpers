@@ -173,12 +173,27 @@ if (! function_exists('ss_isLive')) {
     }
 }
 
+if (! function_exists('app_encrypt')) {
+    /**
+     * Gets short class name
+     *
+     * @param string $class
+     * @param int $keypart
+     * @return string
+     */
+    function app_encrypt($class, $keypart = 10)
+    {
+        $key = Environment::getEnv('APP_KEY');
+        return sha1($class . substr($key, $keypart));
+    }
+}
+
 if (! function_exists('get_class_name')) {
     /**
      * Gets short class name
      *
      * @param string
-     * @return boolean
+     * @return string
      */
     function get_class_name($class)
     {
