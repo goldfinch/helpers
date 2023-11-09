@@ -173,6 +173,19 @@ if (! function_exists('ss_isLive')) {
     }
 }
 
+if (! function_exists('get_class_name')) {
+    /**
+     * Gets short class name
+     *
+     * @param string
+     * @return boolean
+     */
+    function get_class_name($class)
+    {
+        return last(explode('\\', $class));
+    }
+}
+
 if (! function_exists('ss_isDev')) {
     /**
      * Gets the site environment
