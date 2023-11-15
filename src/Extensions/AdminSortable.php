@@ -18,14 +18,18 @@ class AdminSortable extends Extension
         {
             $versioned = true;
 
-            if (!method_exists($this->owner, 'isLiveVersion'))
+            $model = new $this->owner->modelClass();
+
+            if (!method_exists($model, 'isLiveVersion'))
             {
                 try {
-                    $this->owner->isLiveVersion();
+                    $model->isLiveVersion();
                 } catch (\BadMethodCallException $e) {
                     $versioned = false;
                 }
             }
+
+            // dd($this->owner->isLiveVersion());
 
             $config->addComponent(GridFieldOrderableRows::create('SortOrder')->setRepublishLiveRecords($versioned));
 
