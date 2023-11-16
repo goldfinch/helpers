@@ -233,7 +233,7 @@ if (! function_exists('google_maps_preview')) {
      * latitude: -45.0130461
      * longitude: 168.7430014
      * zoom: 19
-     * scale: 2
+     * scale: 2 (1/2)
      * size: 260x180
      * key: AIzaSyBbJ6....
      *
