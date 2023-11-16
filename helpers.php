@@ -239,7 +239,7 @@ if (! function_exists('google_maps_preview')) {
      *
      * @return string
      */
-    function google_maps_preview($latitude, $longitude, $zoom, $scale, $dimensions, $key = null)
+    function google_maps_preview($latitude, $longitude, $zoom, $dimensions, $scale = 0, $key = null)
     {
         if (!$key && Environment::hasEnv('APP_GOOGLE_MAPS_KEY'))
         {
