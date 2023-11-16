@@ -224,3 +224,28 @@ if (! function_exists('is_sha1')) {
         return (bool) preg_match('/^[0-9a-f]{40}$/i', $str);
     }
 }
+
+if (! function_exists('google_maps_preview')) {
+    /**
+     * Get Google Maps preview image
+     *
+     * eg:
+     * latitude: -45.0130461
+     * longitude: 168.7430014
+     * zoom: 19
+     * scale: 2
+     * size: 260x180
+     * key: AIzaSyBbJ6....
+     *
+     * @return string
+     */
+    function google_maps_preview($latitude, $longitude, $zoom, $scale, $dimensions, $key = null)
+    {
+        if (!$key && Environment::hasEnv('APP_GOOGLE_MAPS_KEY'))
+        {
+            $key = Environment::getEnv('APP_GOOGLE_MAPS_KEY');
+        }
+
+        return 'https://maps.googleapis.com/maps/api/staticmap?center='.$latitude.','.$longitude.'&zoom='.$zoom.'&scale='.$scale.'&size='.$dimensions.'&key=' . $key;
+    }
+}
