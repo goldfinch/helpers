@@ -8,6 +8,7 @@ use SilverStripe\Core\Environment;
 use SilverStripe\Core\Config\Config;
 use Silverstripe\SiteConfig\SiteConfig;
 use SilverStripe\ORM\FieldType\DBHTMLText;
+use SilverStripe\View\Parsers\ShortcodeParser;
 
 if (! function_exists('get_composer_json')) {
     /**
@@ -75,6 +76,8 @@ if (! function_exists('str_to_html')) {
         {
             $html = $string;
         }
+
+        $html = ShortcodeParser::get_active()->parse($html);
 
         return $html;
     }
