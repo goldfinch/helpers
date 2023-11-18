@@ -7,6 +7,7 @@ use SilverStripe\Control\Director;
 use SilverStripe\Core\Environment;
 use SilverStripe\Core\Config\Config;
 use Silverstripe\SiteConfig\SiteConfig;
+use SilverStripe\ORM\FieldType\DBHTMLText;
 
 if (! function_exists('get_composer_json')) {
     /**
@@ -45,6 +46,40 @@ if (! function_exists('ss_template_json_parser')) {
     }
 }
 
+if (! function_exists('str_to_html')) {
+    /**
+     * Convert string to html
+     *
+     * @param  string  $string
+     * @param  boolean  $force (false: only strings that has html will be converted)
+     * @return DBHTMLText
+     */
+    function str_to_html($string, $force = true)
+    {
+        if (!is_string($string))
+        {
+            return $string;
+        }
+
+        if ($force)
+        {
+            $html = DBHTMLText::create();
+            $html->setValue($string);
+        }
+        else if ($string != strip_tags($string))
+        {
+            $html = DBHTMLText::create();
+            $html->setValue($string);
+        }
+        else
+        {
+            $html = $string;
+        }
+
+        return $html;
+    }
+}
+
 if (! function_exists('ss_viewable_parser')) {
     /**
      * Parse array to viewable data that can be used in Silverstripe template
@@ -62,10 +97,24 @@ if (! function_exists('ss_viewable_parser')) {
 
                 if (array_is_list($value))
                 {
+                    foreach($value as $k => $v)
+                    {
+                        $value[$k] = str_to_html($v, false);
+                    }
+
                     $value = new ArrayList($value);
                 }
             }
+            else
+            {
+                $value = str_to_html($value, false);
+            }
         });
+
+        foreach($array as $k => $v)
+        {
+            $array[$k] = str_to_html($v, false);
+        }
 
         if (array_is_list($array))
         {
@@ -76,7 +125,7 @@ if (! function_exists('ss_viewable_parser')) {
             $array = new ArrayData($array);
         }
 
-        return  $array;
+        return $array;
     }
 }
 
