@@ -28,7 +28,47 @@ class HelpersTemplateProvider implements TemplateGlobalProvider
             'findObjects',
             'hrefPhone',
             'hrefEmail',
+            'ss_replace',
         ];
+    }
+
+    /**
+     * Helps to find & replace within a string that passed as an argument in the function in .ss
+     *
+     * eg: $Vite.image($ss_replace('../../assets/img/{$find1}/solid/{$find2}.svg', $find1, $replace1, $find2, $replace2))
+     *
+     * @return string
+     *
+     * $filter array eg: findObject(App\Page, '{"NestedPseudo": 0, "NestedRedirectPageID": 0}')
+     */
+    public static function ss_replace($str, ...$args)
+    {
+        $flyStr = null;
+        $search = null;
+        $replace = null;
+
+        foreach ($args as $arg)
+        {
+            if ($search === null)
+            {
+                $search = $arg;
+            }
+            else
+            {
+                $replace = $arg;
+            }
+
+            if ($search && $replace)
+            {
+                $str = str_replace($search, $replace, $str);
+
+                $flyStr = null;
+                $search = null;
+                $replace = null;
+            }
+        }
+
+        return $str;
     }
 
     /**
