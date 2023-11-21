@@ -12,6 +12,7 @@ class AdminSortable extends Extension
     public function updateGridFieldConfig(&$config)
     {
         if (
+            isset(ss_config($this->owner->modelClass, 'db')['SortOrder']) ||
             in_array('SortOrder', ss_config($this->owner->modelClass, 'db')) ||
             in_array(DataObjectSortable::class, ss_config($this->owner->modelClass, 'extensions'))
         )
