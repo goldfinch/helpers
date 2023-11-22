@@ -151,7 +151,8 @@ if (! function_exists('ss_theme')) {
      */
     function ss_theme()
     {
-        $theme = SSViewer::get_themes();
+        // $theme = SSViewer::get_themes();
+        $theme = ss_config(SSViewer::class)['themes'];
         return isset($theme[1]) ? $theme[1] : null;
     }
 }
