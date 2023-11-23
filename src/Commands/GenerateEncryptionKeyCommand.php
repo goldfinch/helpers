@@ -1,6 +1,6 @@
 <?php
 
-namespace Goldfinch\SocialKit\Commands;
+namespace Goldfinch\Helpers\Commands;
 
 use LeKoala\Encrypt\EncryptHelper;
 use Goldfinch\Taz\Services\InputOutput;
