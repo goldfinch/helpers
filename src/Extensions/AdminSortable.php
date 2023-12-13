@@ -14,6 +14,8 @@ class AdminSortable extends Extension
         if (
             isset(ss_config($this->owner->modelClass, 'db')['SortOrder']) ||
             in_array('SortOrder', ss_config($this->owner->modelClass, 'db')) ||
+            isset(ss_config($this->owner->modelClass, 'db')['SortExtra']) ||
+            in_array('SortExtra', ss_config($this->owner->modelClass, 'db')) ||
             in_array(DataObjectSortable::class, ss_config($this->owner->modelClass, 'extensions'))
         )
         {
@@ -32,9 +34,20 @@ class AdminSortable extends Extension
 
             // dd($this->owner->isLiveVersion());
 
-            $config->addComponent(GridFieldOrderableRows::create('SortOrder')->setRepublishLiveRecords($versioned));
+            if (isset(ss_config($this->owner->modelClass, 'db')['SortExtra']) ||
+                in_array('SortExtra', ss_config($this->owner->modelClass, 'db')))
+            {
+                $sortField = 'SortExtra';
+            }
+            else if (isset(ss_config($this->owner->modelClass, 'db')['SortOrder']) ||
+            in_array('SortOrder', ss_config($this->owner->modelClass, 'db')))
+            {
+                $sortField = 'SortOrder';
+            }
 
-            // $config->addComponent($sortable = GridFieldSortableRows::create('SortOrder'));
+            $config->addComponent(GridFieldOrderableRows::create($sortField)->setRepublishLiveRecords($versioned));
+
+            // $config->addComponent($sortable = GridFieldSortableRows::create($sortField));
             // $sortable->setUpdateVersionedStage('Live');
             // $sortable->setUpdateVersionedStage('Versions');
         }

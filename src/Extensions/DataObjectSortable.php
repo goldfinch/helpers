@@ -22,6 +22,7 @@ class DataObjectSortable extends DataExtension
         $fields->removeByName([
             'Sort',
             'SortOrder',
+            'SortExtra',
         ]);
     }
 }

@@ -17,7 +17,7 @@ use SilverStripe\Forms\GridField\GridFieldAddExistingAutocompleter;
 
 class GridFieldManyManyConfig extends GridFieldConfig
 {
-    public function __construct($itemsPerPage = null)
+    public function __construct($itemsPerPage = null, $sortField = 'SortOrder')
     {
         parent::__construct($itemsPerPage);
 
@@ -32,7 +32,7 @@ class GridFieldManyManyConfig extends GridFieldConfig
             GridFieldDeleteAction::create(),
             GridFieldEditButton::create(),
             GridField_ActionMenu::create(),
-            GridFieldOrderableRows::create('SortOrder'),
+            GridFieldOrderableRows::create($sortField),
         );
 
         $dataColumns = $this->getComponentByType(GridFieldDataColumns::class);
