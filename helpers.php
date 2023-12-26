@@ -6,6 +6,7 @@ use SilverStripe\View\ArrayData;
 use SilverStripe\Control\Director;
 use SilverStripe\Core\Environment;
 use SilverStripe\Core\Config\Config;
+use SilverStripe\ORM\FieldType\DBText;
 use Silverstripe\SiteConfig\SiteConfig;
 use SilverStripe\ORM\FieldType\DBHTMLText;
 use SilverStripe\View\Parsers\ShortcodeParser;
@@ -102,7 +103,9 @@ if (! function_exists('ss_viewable_parser')) {
                 {
                     foreach($value as $k => $v)
                     {
-                        $value[$k] = str_to_html($v, false);
+                        $dbtext = DBText::create();
+                        $dbtext->setValue(str_to_html($v, false));
+                        $value[$k] = $dbtext;
                     }
 
                     $value = new ArrayList($value);
