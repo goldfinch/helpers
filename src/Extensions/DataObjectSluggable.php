@@ -18,32 +18,35 @@ class DataObjectSluggable extends DataExtension
 
     public function updateCMSFields(FieldList $fields)
     {
-        $fields->removeByName([
-            'URLSegment',
-        ]);
+        $fields->removeByName(['URLSegment']);
     }
 
     public function onBeforeWrite()
     {
-        if ($this->owner->Title)
-        {
-            if (property_exists($this->owner, 'urlsegment_source'))
-            {
+        if ($this->owner->Title) {
+            if (property_exists($this->owner, 'urlsegment_source')) {
                 $urlSourceName = $this->owner->urlsegment_source;
                 $urlSource = $this->owner->$urlSourceName;
-            }
-            else
-            {
+            } else {
                 $urlSource = $this->owner->Title;
             }
 
-            $this->owner->URLSegment = $this->owner->generateURLSegment($urlSource);
+            $this->owner->URLSegment = $this->owner->generateURLSegment(
+                $urlSource,
+            );
 
             // Ensure that this object has a non-conflicting URLSegment value.
             // dd($this->validURLSegment());
             $count = 2;
             while (!$this->owner->validURLSegment()) {
-                $this->owner->URLSegment = preg_replace('/-[0-9]+$/', '', $this->owner->URLSegment ?? '') . '-' . $count;
+                $this->owner->URLSegment =
+                    preg_replace(
+                        '/-[0-9]+$/',
+                        '',
+                        $this->owner->URLSegment ?? '',
+                    ) .
+                    '-' .
+                    $count;
                 $count++;
             }
         }
@@ -55,7 +58,11 @@ class DataObjectSluggable extends DataExtension
         $filteredTitle = $filter->filter($title);
         // dd($filteredTitle);
         // Fallback to generic page name if path is empty (= no valid, convertable characters)
-        if (!$filteredTitle || $filteredTitle == '-' || $filteredTitle == '-1') {
+        if (
+            !$filteredTitle ||
+            $filteredTitle == '-' ||
+            $filteredTitle == '-1'
+        ) {
             $filteredTitle = "object-$this->ID";
         }
 
@@ -69,7 +76,7 @@ class DataObjectSluggable extends DataExtension
         $classname = get_class($this->owner);
 
         $source = $classname::get()->filter([
-          'URLSegment' => $this->owner->URLSegment,
+            'URLSegment' => $this->owner->URLSegment,
         ]);
 
         if ($this->owner->ID) {

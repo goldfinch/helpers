@@ -11,7 +11,7 @@ use Silverstripe\SiteConfig\SiteConfig;
 use SilverStripe\ORM\FieldType\DBHTMLText;
 use SilverStripe\View\Parsers\ShortcodeParser;
 
-if (! function_exists('get_composer_json')) {
+if (!function_exists('get_composer_json')) {
     /**
      * Gets composer.json data
      *
@@ -35,7 +35,7 @@ if (! function_exists('get_composer_json')) {
     }
 }
 
-if (! function_exists('ss_template_json_parser')) {
+if (!function_exists('ss_template_json_parser')) {
     /**
      * Parse json string from .ss to array
      *
@@ -48,7 +48,7 @@ if (! function_exists('ss_template_json_parser')) {
     }
 }
 
-if (! function_exists('str_to_html')) {
+if (!function_exists('str_to_html')) {
     /**
      * Convert string to html
      *
@@ -58,23 +58,17 @@ if (! function_exists('str_to_html')) {
      */
     function str_to_html($string, $force = true)
     {
-        if (!is_string($string))
-        {
+        if (!is_string($string)) {
             return $string;
         }
 
-        if ($force)
-        {
+        if ($force) {
             $html = DBHTMLText::create();
             $html->setValue($string);
-        }
-        else if ($string != strip_tags($string))
-        {
+        } elseif ($string != strip_tags($string)) {
             $html = DBHTMLText::create();
             $html->setValue($string);
-        }
-        else
-        {
+        } else {
             $html = $string;
         }
 
@@ -84,7 +78,7 @@ if (! function_exists('str_to_html')) {
     }
 }
 
-if (! function_exists('ss_viewable_parser')) {
+if (!function_exists('ss_viewable_parser')) {
     /**
      * Parse array to viewable data that can be used in Silverstripe template
      *
@@ -93,41 +87,34 @@ if (! function_exists('ss_viewable_parser')) {
      */
     function ss_viewable_parser($array)
     {
-        array_walk($array, $walker = function (&$value, $key) use (&$walker) {
+        array_walk(
+            $array,
+            $walker = function (&$value, $key) use (&$walker) {
+                if (is_array($value)) {
+                    array_walk($value, $walker);
 
-            if (is_array($value))
-            {
-                array_walk($value, $walker);
+                    if (array_is_list($value)) {
+                        foreach ($value as $k => $v) {
+                            $dbtext = DBText::create();
+                            $dbtext->setValue(str_to_html($v, false));
+                            $value[$k] = $dbtext;
+                        }
 
-                if (array_is_list($value))
-                {
-                    foreach($value as $k => $v)
-                    {
-                        $dbtext = DBText::create();
-                        $dbtext->setValue(str_to_html($v, false));
-                        $value[$k] = $dbtext;
+                        $value = new ArrayList($value);
                     }
-
-                    $value = new ArrayList($value);
+                } else {
+                    $value = str_to_html($value, false);
                 }
-            }
-            else
-            {
-                $value = str_to_html($value, false);
-            }
-        });
+            },
+        );
 
-        foreach($array as $k => $v)
-        {
+        foreach ($array as $k => $v) {
             $array[$k] = str_to_html($v, false);
         }
 
-        if (array_is_list($array))
-        {
+        if (array_is_list($array)) {
             $array = new ArrayList($array);
-        }
-        else
-        {
+        } else {
             $array = new ArrayData($array);
         }
 
@@ -135,7 +122,7 @@ if (! function_exists('ss_viewable_parser')) {
     }
 }
 
-if (! function_exists('ss_env')) {
+if (!function_exists('ss_env')) {
     /**
      * Gets the value of an environment variable.
      *
@@ -148,7 +135,7 @@ if (! function_exists('ss_env')) {
     }
 }
 
-if (! function_exists('ss_theme')) {
+if (!function_exists('ss_theme')) {
     /**
      * Get current theme
      */
@@ -160,7 +147,7 @@ if (! function_exists('ss_theme')) {
     }
 }
 
-if (! function_exists('ss_theme_template_file_exists')) {
+if (!function_exists('ss_theme_template_file_exists')) {
     /**
      * Check if template exists
      *
@@ -171,13 +158,14 @@ if (! function_exists('ss_theme_template_file_exists')) {
      */
     function ss_theme_template_file_exists($template)
     {
-        $fullpath = THEMES_PATH . '/' . ss_theme() . '/templates/' . $template . '.ss';
+        $fullpath =
+            THEMES_PATH . '/' . ss_theme() . '/templates/' . $template . '.ss';
 
         return file_exists($fullpath);
     }
 }
 
-if (! function_exists('ss_config')) {
+if (!function_exists('ss_config')) {
     /**
      * Gets the config property of a class
      *
@@ -185,18 +173,17 @@ if (! function_exists('ss_config')) {
      * @param  string  $property
      * @return mixed
      */
-    function ss_config(string $class, string $property = null, $subproperty = null)
-    {
+    function ss_config(
+        string $class,
+        string $property = null,
+        $subproperty = null,
+    ) {
         $cfg = Config::inst()->get($class, $property);
 
-        if ($cfg && $subproperty)
-        {
-            if (isset($cfg[$subproperty]))
-            {
+        if ($cfg && $subproperty) {
+            if (isset($cfg[$subproperty])) {
                 return $cfg[$subproperty];
-            }
-            else
-            {
+            } else {
                 return null;
             }
         }
@@ -205,7 +192,7 @@ if (! function_exists('ss_config')) {
     }
 }
 
-if (! function_exists('ss_siteconfig')) {
+if (!function_exists('ss_siteconfig')) {
     /**
      * Gets the SiteConfig with properties
      *
@@ -217,7 +204,7 @@ if (! function_exists('ss_siteconfig')) {
     }
 }
 
-if (! function_exists('ss_isLive')) {
+if (!function_exists('ss_isLive')) {
     /**
      * Gets the site environment
      *
@@ -229,7 +216,7 @@ if (! function_exists('ss_isLive')) {
     }
 }
 
-if (! function_exists('app_encrypt')) {
+if (!function_exists('app_encrypt')) {
     /**
      * Gets short class name
      *
@@ -244,7 +231,7 @@ if (! function_exists('app_encrypt')) {
     }
 }
 
-if (! function_exists('get_class_name')) {
+if (!function_exists('get_class_name')) {
     /**
      * Gets short class name
      *
@@ -257,7 +244,7 @@ if (! function_exists('get_class_name')) {
     }
 }
 
-if (! function_exists('ss_isDev')) {
+if (!function_exists('ss_isDev')) {
     /**
      * Gets the site environment
      *
@@ -269,7 +256,7 @@ if (! function_exists('ss_isDev')) {
     }
 }
 
-if (! function_exists('is_sha1')) {
+if (!function_exists('is_sha1')) {
     /**
      * Check if string sha1 format
      *
@@ -281,7 +268,7 @@ if (! function_exists('is_sha1')) {
     }
 }
 
-if (! function_exists('google_maps_preview')) {
+if (!function_exists('google_maps_preview')) {
     /**
      * Get Google Maps preview image
      *
@@ -295,13 +282,29 @@ if (! function_exists('google_maps_preview')) {
      *
      * @return string
      */
-    function google_maps_preview($latitude, $longitude, $zoom, $dimensions, $scale = 0, $key = null)
-    {
-        if (!$key && Environment::hasEnv('APP_GOOGLE_MAPS_KEY'))
-        {
+    function google_maps_preview(
+        $latitude,
+        $longitude,
+        $zoom,
+        $dimensions,
+        $scale = 0,
+        $key = null,
+    ) {
+        if (!$key && Environment::hasEnv('APP_GOOGLE_MAPS_KEY')) {
             $key = Environment::getEnv('APP_GOOGLE_MAPS_KEY');
         }
 
-        return 'https://maps.googleapis.com/maps/api/staticmap?center='.$latitude.','.$longitude.'&zoom='.$zoom.'&scale='.$scale.'&size='.$dimensions.'&key=' . $key;
+        return 'https://maps.googleapis.com/maps/api/staticmap?center=' .
+            $latitude .
+            ',' .
+            $longitude .
+            '&zoom=' .
+            $zoom .
+            '&scale=' .
+            $scale .
+            '&size=' .
+            $dimensions .
+            '&key=' .
+            $key;
     }
 }

@@ -46,19 +46,14 @@ class HelpersTemplateProvider implements TemplateGlobalProvider
         $search = null;
         $replace = null;
 
-        foreach ($args as $arg)
-        {
-            if ($search === null)
-            {
+        foreach ($args as $arg) {
+            if ($search === null) {
                 $search = $arg;
-            }
-            else
-            {
+            } else {
                 $replace = $arg;
             }
 
-            if ($search && $replace)
-            {
+            if ($search && $replace) {
                 $str = str_replace($search, $replace, $str);
 
                 $flyStr = null;
@@ -105,7 +100,9 @@ class HelpersTemplateProvider implements TemplateGlobalProvider
      */
     public static function paramGet($param)
     {
-        return isset($_GET[$param]) && !empty($_GET[$param]) ? $_GET[$param] : false;
+        return isset($_GET[$param]) && !empty($_GET[$param])
+            ? $_GET[$param]
+            : false;
     }
 
     /**
@@ -116,13 +113,11 @@ class HelpersTemplateProvider implements TemplateGlobalProvider
         $ctrl = Controller::curr();
 
         if ($ctrl) {
+            $request = $ctrl->request;
 
-          $request = $ctrl->request;
-
-          if ($request) {
-
-            return $request->param($param);
-          }
+            if ($request) {
+                return $request->param($param);
+            }
         }
 
         return false;
@@ -138,14 +133,28 @@ class HelpersTemplateProvider implements TemplateGlobalProvider
      */
     public static function strParser($title, $tag = 'span', $attrs = null)
     {
-        $title = preg_replace('/##/', '<'.$tag . ($attrs ? (' ' . $attrs) : '') . '>', $title, 1);
-        $title = preg_replace('/##/', '</'.$tag.'>', $title, 2);
+        $title = preg_replace(
+            '/##/',
+            '<' . $tag . ($attrs ? ' ' . $attrs : '') . '>',
+            $title,
+            1,
+        );
+        $title = preg_replace('/##/', '</' . $tag . '>', $title, 2);
 
-        $title = preg_replace('/\[/', '<'.$tag . ($attrs ? (' ' . $attrs) : '') . '>', $title, 1);
-        $title = preg_replace('/\]/', '</'.$tag.'>', $title);
+        $title = preg_replace(
+            '/\[/',
+            '<' . $tag . ($attrs ? ' ' . $attrs : '') . '>',
+            $title,
+            1,
+        );
+        $title = preg_replace('/\]/', '</' . $tag . '>', $title);
 
-        $title = preg_replace('/\(\(/', '<'.$tag . ($attrs ? (' ' . $attrs) : '') . '>', $title);
-        $title = preg_replace('/\)\)/', '</'.$tag.'>', $title);
+        $title = preg_replace(
+            '/\(\(/',
+            '<' . $tag . ($attrs ? ' ' . $attrs : '') . '>',
+            $title,
+        );
+        $title = preg_replace('/\)\)/', '</' . $tag . '>', $title);
 
         $title = preg_replace('/\^|\|/', '<br>', $title);
 
@@ -160,13 +169,12 @@ class HelpersTemplateProvider implements TemplateGlobalProvider
      */
     public static function strSplit($str)
     {
-        $list = new ArrayList;
+        $list = new ArrayList();
 
         $parts = explode(PHP_EOL, $str);
 
-        foreach($parts as $part)
-        {
-          $output = DBHTMLText::create();
+        foreach ($parts as $part) {
+            $output = DBHTMLText::create();
             $list->push(new ArrayData(['Text' => $output->setValue($part)]));
         }
 
@@ -186,12 +194,12 @@ class HelpersTemplateProvider implements TemplateGlobalProvider
         if (substr($phone, 0, 4) == '0800') {
             $plus = false;
         } elseif (substr($phone, 0, 3) == '640') {
-            $phone = '64'.substr($phone, 3);
+            $phone = '64' . substr($phone, 3);
         } elseif (substr($phone, 0, 1) == '0') {
-            $phone = '64'.substr($phone, 1);
+            $phone = '64' . substr($phone, 1);
         }
 
-        return $plus ? '+'.$phone : $phone;
+        return $plus ? '+' . $phone : $phone;
     }
 
     public static function hrefPhone($str)

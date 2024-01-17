@@ -16,15 +16,16 @@ class AdminSortable extends Extension
             in_array('SortOrder', ss_config($this->owner->modelClass, 'db')) ||
             isset(ss_config($this->owner->modelClass, 'db')['SortExtra']) ||
             in_array('SortExtra', ss_config($this->owner->modelClass, 'db')) ||
-            in_array(DataObjectSortable::class, ss_config($this->owner->modelClass, 'extensions'))
-        )
-        {
+            in_array(
+                DataObjectSortable::class,
+                ss_config($this->owner->modelClass, 'extensions'),
+            )
+        ) {
             $versioned = true;
 
             $model = new $this->owner->modelClass();
 
-            if (!method_exists($model, 'isLiveVersion'))
-            {
+            if (!method_exists($model, 'isLiveVersion')) {
                 try {
                     $model->isLiveVersion();
                 } catch (\BadMethodCallException $e) {
@@ -34,18 +35,23 @@ class AdminSortable extends Extension
 
             // dd($this->owner->isLiveVersion());
 
-            if (isset(ss_config($this->owner->modelClass, 'db')['SortExtra']) ||
-                in_array('SortExtra', ss_config($this->owner->modelClass, 'db')))
-            {
+            if (
+                isset(ss_config($this->owner->modelClass, 'db')['SortExtra']) ||
+                in_array('SortExtra', ss_config($this->owner->modelClass, 'db'))
+            ) {
                 $sortField = 'SortExtra';
-            }
-            else if (isset(ss_config($this->owner->modelClass, 'db')['SortOrder']) ||
-            in_array('SortOrder', ss_config($this->owner->modelClass, 'db')))
-            {
+            } elseif (
+                isset(ss_config($this->owner->modelClass, 'db')['SortOrder']) ||
+                in_array('SortOrder', ss_config($this->owner->modelClass, 'db'))
+            ) {
                 $sortField = 'SortOrder';
             }
 
-            $config->addComponent(GridFieldOrderableRows::create($sortField)->setRepublishLiveRecords($versioned));
+            $config->addComponent(
+                GridFieldOrderableRows::create(
+                    $sortField,
+                )->setRepublishLiveRecords($versioned),
+            );
 
             // $config->addComponent($sortable = GridFieldSortableRows::create($sortField));
             // $sortable->setUpdateVersionedStage('Live');

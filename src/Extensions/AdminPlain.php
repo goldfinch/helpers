@@ -14,7 +14,6 @@ class AdminPlain extends Extension
         $config
             ->removeComponentsByType(GridFieldExportButton::class)
             ->removeComponentsByType(GridFieldPrintButton::class)
-            ->removeComponentsByType(GridFieldImportButton::class)
-        ;
+            ->removeComponentsByType(GridFieldImportButton::class);
     }
 }

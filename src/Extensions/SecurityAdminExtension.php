@@ -14,11 +14,15 @@ class SecurityAdminExtension extends DataExtension
 {
     public function updateList(DataList &$list)
     {
-        if ($list->dataClass === Member::class)
-        {
-            if (Security::getCurrentUser()->Email !== ss_env('SS_DEFAULT_ADMIN_USERNAME'))
-            {
-                $list = $list->filter('email:not', ss_env('SS_DEFAULT_ADMIN_USERNAME'));
+        if ($list->dataClass === Member::class) {
+            if (
+                Security::getCurrentUser()->Email !==
+                ss_env('SS_DEFAULT_ADMIN_USERNAME')
+            ) {
+                $list = $list->filter(
+                    'email:not',
+                    ss_env('SS_DEFAULT_ADMIN_USERNAME'),
+                );
             }
         }
     }

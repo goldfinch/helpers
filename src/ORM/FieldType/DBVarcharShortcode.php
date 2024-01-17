@@ -37,7 +37,7 @@ class DBVarcharShortcode extends DBVarchar
      */
     public function setProcessShortcodes($process)
     {
-        $this->processShortcodes = (bool)$process;
+        $this->processShortcodes = (bool) $process;
         return $this;
     }
 
@@ -60,8 +60,8 @@ class DBVarcharShortcode extends DBVarchar
      */
     public function setOptions(array $options = [])
     {
-        if (array_key_exists("shortcodes", $options ?? [])) {
-            $this->setProcessShortcodes(!!$options["shortcodes"]);
+        if (array_key_exists('shortcodes', $options ?? [])) {
+            $this->setProcessShortcodes(!!$options['shortcodes']);
         }
 
         return parent::setOptions($options);
@@ -92,7 +92,9 @@ class DBVarcharShortcode extends DBVarchar
      */
     public function scaffoldFormField($title = null, $params = null)
     {
-        return TextField::create($this->name, $title)->setDescription('· allowed shortcodes: <b title="makes new line">[br]</b>, <b title="wraps text in span">[sp]</b>');
+        return TextField::create($this->name, $title)->setDescription(
+            '· allowed shortcodes: <b title="makes new line">[br]</b>, <b title="wraps text in span">[sp]</b>',
+        );
     }
 
     public function NoSC()

@@ -19,10 +19,6 @@ class DataObjectSortable extends DataExtension
 
     public function updateCMSFields(FieldList $fields)
     {
-        $fields->removeByName([
-            'Sort',
-            'SortOrder',
-            'SortExtra',
-        ]);
+        $fields->removeByName(['Sort', 'SortOrder', 'SortExtra']);
     }
 }

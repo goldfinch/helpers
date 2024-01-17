@@ -2,9 +2,7 @@
     "name": "goldfinch/helpers",
     "description": "",
     "type": "silverstripe-vendormodule",
-    "keywords": [
-        "silverstripe"
-    ],
+    "keywords": ["silverstripe"],
     "license": "MIT",
     "authors": [
         {
@@ -23,14 +21,10 @@
         "psr-4": {
             "Goldfinch\\Helpers\\": "src/"
         },
-        "files": [
-            "helpers.php"
-        ]
+        "files": ["helpers.php"]
     },
     "extra": {
-        "expose": [
-            "client/dist"
-        ]
+        "expose": ["client/dist"]
     },
     "minimum-stability": "dev",
     "prefer-stable": true

@@ -40,7 +40,7 @@ class GridFieldManyManyConfig extends GridFieldConfig
         $dataColumns->setDisplayFields([
             'Title' => 'Title',
             // 'Link'=> 'URL',
-            'LastEdited' => 'Changed'
+            'LastEdited' => 'Changed',
         ]);
 
         // $this->addComponent($dataColumns);

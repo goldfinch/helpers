@@ -12,6 +12,14 @@ class AdminPaginator extends Extension
     {
         $config
             ->removeComponentsByType(GridFieldPaginator::class)
-            ->addComponent(GridFieldConfigurablePaginator::create(50, [10, 50, 100, 200, 300]));
+            ->addComponent(
+                GridFieldConfigurablePaginator::create(50, [
+                    10,
+                    50,
+                    100,
+                    200,
+                    300,
+                ]),
+            );
     }
 }

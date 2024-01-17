@@ -8,16 +8,12 @@ class ViewableTemplateProvider implements TemplateGlobalProvider
 {
     public static function get_template_global_variables(): array
     {
-        return [
-            'ViewJson',
-            'ViewArray',
-        ];
+        return ['ViewJson', 'ViewArray'];
     }
 
     public static function ViewJson($string)
     {
-        if (!$string)
-        {
+        if (!$string) {
             return $string;
         }
 
@@ -28,8 +24,7 @@ class ViewableTemplateProvider implements TemplateGlobalProvider
 
     public static function ViewArray($array)
     {
-        if (!$array)
-        {
+        if (!$array) {
             return $array;
         }
 

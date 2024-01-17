@@ -1,7 +1,6 @@
 ---
 Name: goldfinch-helpers
 ---
-
 SilverStripe\ORM\DataObject:
   extensions:
     - Goldfinch\Helpers\Extensions\DataObjectExtension

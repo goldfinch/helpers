@@ -18,18 +18,14 @@ class DataObjectExtension extends DataExtension
 
         $required_fields = $this->owner->config()->get('required_fields');
 
-        foreach ($required_fields as $key => $name)
-        {
+        foreach ($required_fields as $key => $name) {
             $field = $this->owner->dbObject($name);
 
-            if (empty($field->getValue()))
-            {
+            if (empty($field->getValue())) {
                 $result->addError(
-                    _t(
-                        __CLASS__ . '.REQUIRED_FIELD',
-                        '{field} is required',
-                        ['field' => $name]
-                    )
+                    _t(__CLASS__ . '.REQUIRED_FIELD', '{field} is required', [
+                        'field' => $name,
+                    ]),
                 );
             }
         }
@@ -41,14 +37,19 @@ class DataObjectExtension extends DataExtension
     {
         $field_descriptions = $this->owner->config()->get('field_descriptions');
 
-        foreach($field_descriptions as $field => $description)
-        {
+        foreach ($field_descriptions as $field => $description) {
             $field = $fields->dataFieldByName($field);
 
-            if ($field)
-            {
+            if ($field) {
                 $currentDescription = $field->getDescription();
-                $field->setDescription($currentDescription ? ('<div>' . $description . '</div>' . $currentDescription) : $description);
+                $field->setDescription(
+                    $currentDescription
+                        ? '<div>' .
+                            $description .
+                            '</div>' .
+                            $currentDescription
+                        : $description,
+                );
             }
         }
     }
