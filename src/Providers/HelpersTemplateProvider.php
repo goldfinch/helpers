@@ -4,7 +4,6 @@ namespace Goldfinch\Helpers\Providers;
 
 use SilverStripe\ORM\ArrayList;
 use SilverStripe\View\ArrayData;
-use SilverStripe\Core\Environment;
 use SilverStripe\Control\Controller;
 use SilverStripe\ORM\FieldType\DBHTMLText;
 use SilverStripe\View\TemplateGlobalProvider;
