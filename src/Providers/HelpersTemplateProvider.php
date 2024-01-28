@@ -110,13 +110,15 @@ class HelpersTemplateProvider implements TemplateGlobalProvider
      */
     public static function paramRequest($param)
     {
-        $ctrl = Controller::curr();
+        if (Controller::has_curr()) {
+            $ctrl = Controller::curr();
 
-        if ($ctrl) {
-            $request = $ctrl->request;
+            if ($ctrl) {
+                $request = $ctrl->request;
 
-            if ($request) {
-                return $request->param($param);
+                if ($request) {
+                    return $request->param($param);
+                }
             }
         }
 
