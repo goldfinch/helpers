@@ -114,7 +114,7 @@ class HelpersTemplateProvider implements TemplateGlobalProvider
             $ctrl = Controller::curr();
 
             if ($ctrl) {
-                $request = $ctrl->request;
+                $request = $ctrl->getRequest();
 
                 if ($request) {
                     return $request->param($param);
