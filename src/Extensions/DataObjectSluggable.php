@@ -16,39 +16,35 @@ class DataObjectSluggable extends DataExtension
         'URLSegment' => 'URL',
     ];
 
+    private static $urlsegment_source = 'Title';
+
     public function updateCMSFields(FieldList $fields)
     {
         $fields->removeByName(['URLSegment']);
     }
 
+    // public function updateFielder($fielder)
+    // {
+    //     $fielder->disable('URLSegment');
+    // }
+
     public function onBeforeWrite()
     {
-        if ($this->owner->Title) {
-            if (property_exists($this->owner, 'urlsegment_source')) {
-                $urlSourceName = $this->owner->urlsegment_source;
-                $urlSource = $this->owner->$urlSourceName;
-            } else {
-                $urlSource = $this->owner->Title;
-            }
+        parent::onBeforeWrite();
 
-            $this->owner->URLSegment = $this->owner->generateURLSegment(
-                $urlSource,
-            );
+        $urlsegment_source = $this->owner->config()->get('urlsegment_source');
 
-            // Ensure that this object has a non-conflicting URLSegment value.
-            // dd($this->validURLSegment());
-            $count = 2;
-            while (!$this->owner->validURLSegment()) {
-                $this->owner->URLSegment =
-                    preg_replace(
-                        '/-[0-9]+$/',
-                        '',
-                        $this->owner->URLSegment ?? '',
-                    ) .
-                    '-' .
-                    $count;
-                $count++;
-            }
+        if (!$this->owner->URLSegment || $this->owner->isChanged($urlsegment_source)) {
+            $this->owner->URLSegment = $this->generateURLSegment($this->owner->$urlsegment_source);
+        }
+
+        $count = 2;
+        while ($this->validURLSegment()) {
+            $this->owner->URLSegment =
+                preg_replace('/-[0-9]+$/', '', $this->owner->URLSegment ?? '') .
+                '-' .
+                $count;
+            $count++;
         }
     }
 
@@ -56,16 +52,17 @@ class DataObjectSluggable extends DataExtension
     {
         $filter = URLSegmentFilter::create();
         $filteredTitle = $filter->filter($title);
-        // dd($filteredTitle);
+
         // Fallback to generic page name if path is empty (= no valid, convertable characters)
         if (
             !$filteredTitle ||
             $filteredTitle == '-' ||
             $filteredTitle == '-1'
         ) {
-            $filteredTitle = "object-$this->ID";
+            $filteredTitle = "page-" . $this->owner->ID;
         }
 
+        // Hook for extensions
         $this->owner->extend('updateURLSegment', $filteredTitle, $title);
 
         return $filteredTitle;
@@ -73,16 +70,6 @@ class DataObjectSluggable extends DataExtension
 
     public function validURLSegment()
     {
-        $classname = get_class($this->owner);
-
-        $source = $classname::get()->filter([
-            'URLSegment' => $this->owner->URLSegment,
-        ]);
-
-        if ($this->owner->ID) {
-            $source = $source->exclude('ID', $this->owner->ID);
-        }
-
-        return !$source->exists();
+        return $this->owner::get()->filter('URLSegment', $this->owner->URLSegment)->exclude('ID', $this->owner->ID)->exists();
     }
 }
