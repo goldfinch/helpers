@@ -6,7 +6,7 @@ use Swis\TextSnippet;
 use SilverStripe\ORM\DataExtension;
 use SilverStripe\ORM\FieldType\DBHTMLText;
 
-class DBHighlight extends DataExtension
+class DBHighlightExtension extends DataExtension
 {
     public function Highlight($q, $min = 30, $max = 100)
     {

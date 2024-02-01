@@ -11,15 +11,15 @@ SilverStripe\Core\Injector\Injector:
 
 SilverStripe\ORM\FieldType\DBHTMLText:
   extensions:
-    - Goldfinch\Helpers\Extensions\DBHighlight
+    - Goldfinch\Helpers\Extensions\DBHighlightExtension
 
 SilverStripe\ORM\FieldType\DBString:
   extensions:
-    - Goldfinch\Helpers\Extensions\DBHighlight
+    - Goldfinch\Helpers\Extensions\DBHighlightExtension
 
 SilverStripe\ORM\FieldType\DBHTMLVarchar:
   extensions:
-    - Goldfinch\Helpers\Extensions\DBHighlight
+    - Goldfinch\Helpers\Extensions\DBHighlightExtension
 
 SilverStripe\Admin\ModelAdmin:
   extensions:
