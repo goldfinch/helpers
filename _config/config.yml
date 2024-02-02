@@ -6,6 +6,8 @@ SilverStripe\ORM\DataObject:
     - Goldfinch\Helpers\Extensions\DataObjectExtension
 
 SilverStripe\Core\Injector\Injector:
+  SilverStripe\ORM\DataList:
+    class: Goldfinch\Helpers\ORM\DataList
   ShortcodeVarchar:
     class: Goldfinch\Helpers\ORM\FieldType\DBVarcharShortcode
 
