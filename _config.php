@@ -33,7 +33,7 @@ if (Director::isDev() && Environment::hasEnv('SS_DATABASE_SOCKET')) {
 }
 
 // fixing errors in mysql 5.7+
-if (class_exists(DB::class)) {
+if (Environment::getEnv('SS_DATABASE_CLASS') == 'MySQLDatabase' && class_exists(DB::class)) {
     DB::query(
         "SET SESSION sql_mode='REAL_AS_FLOAT,PIPES_AS_CONCAT,ANSI_QUOTES,IGNORE_SPACE';",
     );
