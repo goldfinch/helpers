@@ -19,7 +19,9 @@ class BaseElementExtension extends DataExtension
 
         $global = $fields->dataFieldByName('AvailableGlobally');
 
-        $fields->insertAfter('ExtraClass', $global);
+        if ($global) {
+            $fields->insertAfter('ExtraClass', $global);
+        }
     }
 
     public function onBeforeWrite()
