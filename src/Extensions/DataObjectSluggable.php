@@ -23,11 +23,6 @@ class DataObjectSluggable extends DataExtension
         $fields->removeByName(['URLSegment']);
     }
 
-    // public function updateFielder($fielder)
-    // {
-    //     $fielder->disable('URLSegment');
-    // }
-
     public function onBeforeWrite()
     {
         parent::onBeforeWrite();
