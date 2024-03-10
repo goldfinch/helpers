@@ -11,6 +11,10 @@ SilverStripe\Core\Injector\Injector:
   ShortcodeVarchar:
     class: Goldfinch\Helpers\ORM\FieldType\DBVarcharShortcode
 
+SilverStripe\ORM\FieldType\DBText:
+  extensions:
+    - Goldfinch\Helpers\Extensions\DBTextExtension
+
 SilverStripe\ORM\FieldType\DBHTMLText:
   extensions:
     - Goldfinch\Helpers\Extensions\DBHighlightExtension
