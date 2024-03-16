@@ -100,7 +100,9 @@ if (!function_exists('ss_viewable_parser')) {
                             $value[$k] = $dbtext;
                         }
 
-                        $value = new ArrayList($value);
+                        $value = ArrayList::create($value);
+                    } else {
+                        $value = ArrayData::create($value); // fly-store additional (double check in use)
                     }
                 } else {
                     $value = str_to_html($value, false);
@@ -113,9 +115,9 @@ if (!function_exists('ss_viewable_parser')) {
         }
 
         if (array_is_list($array)) {
-            $array = new ArrayList($array);
+            $array = ArrayList::create($array);
         } else {
-            $array = new ArrayData($array);
+            $array = ArrayData::create($array);
         }
 
         return $array;
