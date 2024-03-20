@@ -26,3 +26,8 @@ class SomeModel extends DataObject
 
 }
 ```
+
+```html
+<% include Goldfinch/Helpers/Link LinkObject=$Icon1Link, attrClass='btn btn-link' %>
+<% include Goldfinch/Helpers/InlineLink LinkObject=$CustomLink, attrClass='btn btn-link' %>
+```
