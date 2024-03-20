@@ -7,6 +7,7 @@ use SilverStripe\View\ArrayData;
 use SilverStripe\Control\Controller;
 use SilverStripe\ORM\FieldType\DBHTMLText;
 use SilverStripe\View\TemplateGlobalProvider;
+use Goldfinch\Imaginarium\Views\ImagePlaceholder;
 
 class HelpersTemplateProvider implements TemplateGlobalProvider
 {
@@ -28,7 +29,25 @@ class HelpersTemplateProvider implements TemplateGlobalProvider
             'hrefPhone',
             'hrefEmail',
             'ss_replace',
+            'fakeList',
+            'fakeImage',
         ];
+    }
+
+    public static function fakeList($count)
+    {
+        $list = ArrayList::create();
+
+        for ($i = 0; $i < $count; $i++) {
+            $list->push(ArrayData::create());
+        }
+
+        return $list;
+    }
+
+    public static function fakeImage(...$args)
+    {
+        return ImagePlaceholder::create(...$args);
     }
 
     /**
