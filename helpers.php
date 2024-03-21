@@ -294,6 +294,13 @@ if (!function_exists('google_maps_preview')) {
     ) {
         if (!$key && Environment::hasEnv('APP_GOOGLE_MAPS_KEY')) {
             $key = Environment::getEnv('APP_GOOGLE_MAPS_KEY');
+        } else {
+            $cfg = SiteConfig::current_site_config();
+            if ($cfg->GoogleCloud && $cfg->GoogleCloudAPIKey) {
+                $key = $cfg->GoogleCloudAPIKey;
+            } else {
+                $key = '';
+            }
         }
 
         return 'https://maps.googleapis.com/maps/api/staticmap?center=' .
