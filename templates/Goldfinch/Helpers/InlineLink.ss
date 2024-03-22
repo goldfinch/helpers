@@ -1,3 +1,4 @@
+<%-- TODO: used Link.ss at the moment and needs to be changed to LinkRel --%>
 <% if LinkObject %>
   <% with LinkObject %>
       <a
