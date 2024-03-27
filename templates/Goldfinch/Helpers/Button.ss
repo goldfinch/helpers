@@ -1,11 +1,10 @@
 <% if LinkObject %>
   <% with LinkObject %>
-    <a
+    <button
       $Top.attrs
-      href="$URL"
       <% if Top.attrId %> id="{$Top.attrId}"<% end_if %>
       <% if $Top.attrClass %> class="{$Top.attrClass}" <% end_if%>
       <% if $OpenInNew %>target="_blank" rel="noopener noreferrer"<% end_if %>
-    >$Title</a>
+    >$Title</button>
   <% end_with %>
 <% end_if %>
