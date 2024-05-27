@@ -1,18 +1,27 @@
 <?php
 
-use SilverStripe\ORM\DB;
 use SilverStripe\Control\Director;
 use SilverStripe\Core\Environment;
+use SilverStripe\ORM\DB;
 use SilverStripe\View\Parsers\ShortcodeParser;
 
-ShortcodeParser::get('default')->register('br', function (
-    $arguments,
-    $address,
-    $parser,
-    $shortcode,
-) {
-    return '<br>';
-});
+$shortcode = ss_config('Goldfinch\Shortcode\Shortcode');
+
+if ($shortcode && isset($shortcode['allow_shortcodes']['br'])) {
+    $ignoreDefaultBR = true;
+}
+
+if (! isset($ignoreDefaultBR)) {
+
+    ShortcodeParser::get('default')->register('br', function (
+        $arguments,
+        $address,
+        $parser,
+        $shortcode,
+    ) {
+        return '<br>';
+    });
+}
 
 ShortcodeParser::get('default')->register('sp', function (
     $arguments,
@@ -20,7 +29,7 @@ ShortcodeParser::get('default')->register('sp', function (
     $parser,
     $shortcode,
 ) {
-    return '<span>' . $content . '</span>';
+    return '<span>'.$content.'</span>';
 });
 
 if (Environment::hasEnv('APP_TIMEZONE')) {
