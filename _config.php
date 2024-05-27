@@ -12,7 +12,6 @@ if ($shortcode && isset($shortcode['allow_shortcodes']['br'])) {
 }
 
 if (! isset($ignoreDefaultBR)) {
-
     ShortcodeParser::get('default')->register('br', function (
         $arguments,
         $address,
@@ -23,14 +22,21 @@ if (! isset($ignoreDefaultBR)) {
     });
 }
 
-ShortcodeParser::get('default')->register('sp', function (
-    $arguments,
-    $content,
-    $parser,
-    $shortcode,
-) {
-    return '<span>'.$content.'</span>';
-});
+if ($shortcode && isset($shortcode['allow_shortcodes']['span'])) {
+    $ignoreDefaultSPAN = true;
+}
+
+if (! isset($ignoreDefaultSPAN)) {
+
+    ShortcodeParser::get('default')->register('sp', function (
+        $arguments,
+        $content,
+        $parser,
+        $shortcode,
+    ) {
+        return '<span>'.$content.'</span>';
+    });
+}
 
 if (Environment::hasEnv('APP_TIMEZONE')) {
     date_default_timezone_set(Environment::getEnv('APP_TIMEZONE'));
