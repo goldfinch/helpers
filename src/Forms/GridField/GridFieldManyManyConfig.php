@@ -14,6 +14,7 @@ use SilverStripe\Forms\GridField\GridFieldToolbarHeader;
 use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
 use SilverStripe\Forms\GridField\GridFieldSortableHeader;
 use SilverStripe\Forms\GridField\GridFieldAddExistingAutocompleter;
+use SilverStripe\Forms\GridField\GridFieldPaginator;
 
 class GridFieldManyManyConfig extends GridFieldConfig
 {
@@ -33,6 +34,8 @@ class GridFieldManyManyConfig extends GridFieldConfig
             GridFieldEditButton::create(),
             GridField_ActionMenu::create(),
             GridFieldOrderableRows::create($sortField),
+            GridFieldOrderableRows::create($sortField),
+            GridFieldPaginator::create(),
         );
 
         $dataColumns = $this->getComponentByType(GridFieldDataColumns::class);
