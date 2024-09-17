@@ -30,7 +30,7 @@ SilverStripe\ORM\FieldType\DBHTMLVarchar:
 SilverStripe\Admin\ModelAdmin:
   extensions:
     - Goldfinch\Helpers\Extensions\AdminPaginator
-    - Goldfinch\Helpers\Extensions\AdminPlain
+    # - Goldfinch\Helpers\Extensions\AdminPlain
     - Goldfinch\Helpers\Extensions\AdminSortable
 
 SilverStripe\Admin\SecurityAdmin:
