@@ -34,7 +34,6 @@ class GridFieldManyManyConfig extends GridFieldConfig
             GridFieldEditButton::create(),
             GridField_ActionMenu::create(),
             GridFieldOrderableRows::create($sortField),
-            GridFieldOrderableRows::create($sortField),
             GridFieldPaginator::create(),
         );
 
