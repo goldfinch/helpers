@@ -87,6 +87,10 @@ if (!function_exists('ss_viewable_parser')) {
      */
     function ss_viewable_parser($array)
     {
+      	if (!is_array($array)) {
+          $array = json_decode($array);
+        }
+      
         array_walk(
             $array,
             $walker = function (&$value, $key) use (&$walker) {
