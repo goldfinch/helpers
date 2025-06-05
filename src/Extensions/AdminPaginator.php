@@ -2,6 +2,7 @@
 
 namespace Goldfinch\Helpers\Extensions;
 
+use SilverStripe\Core\Extension;
 use SilverStripe\Forms\GridField\GridFieldPaginator;
 use SilverStripe\Forms\GridField\GridFieldPageCount;
 use Symbiote\GridFieldExtensions\GridFieldConfigurablePaginator;
